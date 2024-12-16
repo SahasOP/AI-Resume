@@ -19,12 +19,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <Dashboard />
+        element: <Dashboard />,
       },
       {
         path: "/dashboard/resume/:resumeId/edit",
-        element: <EditResume />
-      }
+        element: <EditResume />,
+      },
     ],
   },
   {
@@ -37,9 +37,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/my-resume/:resumeId/view",
-    element: <ViewResume />,
+    element: <ViewResume />, // Everyone can access this
   },
 ]);
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -14,7 +14,7 @@ function Summery({enabledNext}) {
     const [summery,setSummery]=useState();
     const [loading,setLoading]=useState(false);
     const params=useParams();
-    const [aiGeneratedSummeryList,setAiGenerateSummeryList]=useState();
+    const [aiGeneratedSummeryList,setAiGenerateSummeryList]=useState([]);
     useEffect(()=>{
         summery&&setResumeInfo({
             ...resumeInfo,
@@ -28,10 +28,13 @@ function Summery({enabledNext}) {
         console.log(PROMPT);
         const result=await AIChatSession.sendMessage(PROMPT);
         console.log(JSON.parse(result.response.text()))
-       
-        setAiGenerateSummeryList(JSON.parse(result.response.text()))
+        let data=JSON.parse(result.response.text())
+        setAiGenerateSummeryList(data.summaries)
         setLoading(false);
     }
+    useEffect(() => {
+        console.log(aiGeneratedSummeryList);  // Logs the updated aiGeneratedSummeryList after state change
+    }, [aiGeneratedSummeryList]);
 
     const onSave=(e)=>{
         e.preventDefault();
